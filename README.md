@@ -46,6 +46,7 @@ ____________________________________O/_______
 To build the binary, you can run this command:
 
 ```
+go mod vendor
 make build
 ```
 
@@ -68,6 +69,7 @@ The binary will be stored at folder `./bin`
 To run the API using go, run this command inside `soccer-api` folder:
 
 ```
+go mod vendor
 go run main.go
 ```
 
