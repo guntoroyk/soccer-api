@@ -47,8 +47,8 @@ func TestNewHandler(t *testing.T) {
 var (
 	successGetTeamsJSON         = "{\"code\":200,\"data\":[{\"id\":1,\"name\":\"Manchester United\",\"players\":null}]}\n"
 	successGetTeamJSON          = "{\"code\":200,\"data\":{\"id\":1,\"name\":\"Manchester United\",\"players\":null}}\n"
-	failedGetTeamJSON           = "{\"code\":500,\"data\":null,\"error\":\"failed get team\"}\n"
-	failedGetTeamNotfoundJSON   = "{\"code\":404,\"data\":null,\"error\":\"team not found\"}\n"
+	failedGetTeamJSON           = "{\"code\":500,\"error\":\"failed get team\"}\n"
+	failedGetTeamNotfoundJSON   = "{\"code\":404,\"error\":\"team not found\"}\n"
 	failedCreateTeamJSON        = "{\"code\":500,\"error\":\"failed create team\"}\n"
 	successCreateTeamJSON       = "{\"code\":201,\"data\":{\"id\":1,\"name\":\"Manchester United\",\"players\":null}}\n"
 	failedAddPlayerToTeamJSON   = "{\"code\":500,\"error\":\"failed add player to team\"}\n"

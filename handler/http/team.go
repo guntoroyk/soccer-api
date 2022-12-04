@@ -44,10 +44,7 @@ func (h *handler) GetTeam(c echo.Context) error {
 
 	team, err := h.teamUseCase.GetTeam(converter.ToInt(id))
 
-	resp := HttpResponse{
-		Code: http.StatusOK,
-		Data: team,
-	}
+	resp := HttpResponse{}
 
 	if errors.Is(err, entity.ErrTeamNotFound) {
 		resp.Code = http.StatusNotFound
@@ -55,6 +52,9 @@ func (h *handler) GetTeam(c echo.Context) error {
 	} else if err != nil {
 		resp.Code = http.StatusInternalServerError
 		resp.Error = err.Error()
+	} else {
+		resp.Code = http.StatusOK
+		resp.Data = team
 	}
 
 	return c.JSON(resp.Code, resp)
