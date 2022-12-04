@@ -213,8 +213,9 @@ func Test_teamRepo_CreateTeam(t *testing.T) {
 				},
 			},
 			want: &entity.Team{
-				ID:   1,
-				Name: "Manchester United",
+				ID:      1,
+				Name:    "Manchester United",
+				Players: []*entity.Player{},
 			},
 			wantErr: false,
 		},

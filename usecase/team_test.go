@@ -292,6 +292,7 @@ func Test_teamUsecase_AddPlayerToTeam(t *testing.T) {
 			fields: fields{
 				teamRepo: func(ctrl *gomock.Controller) repository.TeamRepoItf {
 					mockTeamRepo := mocks.NewMockTeamRepoItf(ctrl)
+					mockTeamRepo.EXPECT().GetTeams().Return(nil, nil)
 					mockTeamRepo.EXPECT().GetTeam(gomock.Any()).Return(&entity.Team{
 						ID:   1,
 						Name: "Manchester United",
@@ -314,6 +315,7 @@ func Test_teamUsecase_AddPlayerToTeam(t *testing.T) {
 			fields: fields{
 				teamRepo: func(ctrl *gomock.Controller) repository.TeamRepoItf {
 					mockTeamRepo := mocks.NewMockTeamRepoItf(ctrl)
+					mockTeamRepo.EXPECT().GetTeams().Return(nil, nil)
 					mockTeamRepo.EXPECT().GetTeam(gomock.Any()).Return(&entity.Team{
 						ID:   1,
 						Name: "Manchester United",

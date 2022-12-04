@@ -41,22 +41,21 @@ func (t *teamUsecase) CreateTeam(team *entity.Team) (*entity.Team, error) {
 
 // AddPlayerToTeam will add player to team
 func (t *teamUsecase) AddPlayerToTeam(teamID int, player *entity.Player) error {
-	// // get teams
-	// _, err := t.teamRepo.GetTeams()
-	// if err != nil {
-	// 	return err
-	// }
+	if player == nil {
+		return entity.ErrPlayerCannotBeNil
+	}
 
-	// // check if player already exist on a team
-	// for _, team := range teams {
-	// 	for _, p := range team.Players {
-	// 		if p.ID == player.ID {
-	// 			return entity.ErrPlayerAlreadyInTeam
-	// 		}
-	// 	}
-	// }
+	if player.Name == "" {
+		return entity.ErrPlayerNameIsRequired
+	}
 
-	// get team
+	// check if player already exist on a team
+	_, err := t.getPlayerTeam(player.Name)
+	if err == nil {
+		return entity.ErrPlayerAlreadyInTeam
+	}
+
+	// validate teamID
 	team, err := t.teamRepo.GetTeam(teamID)
 	if err != nil {
 		return err
@@ -64,6 +63,25 @@ func (t *teamUsecase) AddPlayerToTeam(teamID int, player *entity.Player) error {
 
 	// add player to team
 	return t.teamRepo.AddPlayerToTeam(team.ID, player)
+}
+
+func (t *teamUsecase) getPlayerTeam(playerName string) (*entity.Team, error) {
+	// get teams
+	teams, err := t.teamRepo.GetTeams()
+	if err != nil {
+		return nil, err
+	}
+
+	// check if player already exist on a team
+	for _, team := range teams {
+		for _, p := range team.Players {
+			if p.Name == playerName {
+				return team, nil
+			}
+		}
+	}
+
+	return nil, entity.ErrPlayerNotFound
 }
 
 // GetPlayer will get player by id

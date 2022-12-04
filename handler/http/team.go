@@ -102,6 +102,9 @@ func (h *handler) AddPlayerToTeam(c echo.Context) error {
 	if errors.Is(err, entity.ErrTeamNotFound) {
 		resp.Code = http.StatusNotFound
 		resp.Error = err.Error()
+	} else if errors.Is(err, entity.ErrPlayerAlreadyInTeam) {
+		resp.Code = http.StatusBadRequest
+		resp.Error = err.Error()
 	} else if err != nil {
 		resp.Code = http.StatusInternalServerError
 		resp.Error = err.Error()

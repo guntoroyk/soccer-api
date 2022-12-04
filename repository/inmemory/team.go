@@ -48,6 +48,7 @@ func (t *teamRepo) CreateTeam(team *entity.Team) (*entity.Team, error) {
 	}
 
 	team.ID = t.lastTeamID + 1
+	team.Players = []*entity.Player{}
 	t.teams[team.ID] = team
 
 	t.lastTeamID++
