@@ -2,13 +2,23 @@
 
 Soccer API is a dummy REST API that can create a team, add player to a team, get a team including with the players, and get a player
 
-## How to run
+## Clone the repository
 
 Clone the repository
 
 ```
 git clone git@github.com:guntoroyk/soccer-api.git
 ```
+
+## Run on Docker
+
+```
+docker-compose up --build -d
+```
+
+The API will available at http://localhost:8000
+
+## Run prebuilt binary
 
 Run the prebuilt binary on `./bin` folder based on your OS and machine architecture with the following format :
 
@@ -21,7 +31,7 @@ Example:
 ```
 ./bin/soccer-api-darwin-arm64
 
-./bin/soccer-api-linux-arm64
+./bin/soccer-api-linux-amd64
 ```
 
 The API server will live on default port `8000`
@@ -39,6 +49,15 @@ ____________________________________O/_______
                                     O\
 ⇨ http server started on [::]:8000
 
+```
+
+## Run using go
+
+To run the API using go, run this command inside `soccer-api` folder:
+
+```
+go mod vendor
+go run main.go
 ```
 
 ## Build
@@ -63,15 +82,6 @@ make build-all
 ```
 
 The binary will be stored at folder `./bin`
-
-## Run using go
-
-To run the API using go, run this command inside `soccer-api` folder:
-
-```
-go mod vendor
-go run main.go
-```
 
 ## REST API Documentation
 
